@@ -1,18 +1,40 @@
 import { useEffect, useRef } from 'react'
 import { animate } from 'animejs'
 
-export function useAnime() {
-  const nodeRef = useRef<HTMLDivElement>(null)
+
+
+type AnimeParams = Parameters<typeof animate>[1]
+
+
+export function useScrollAnimation(animationConfig: AnimeParams) {
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (nodeRef.current) {
-      animate(nodeRef.current, {
-        scale: [0.9, 1],
-        opacity: [0, 1],
-        delay: 200,
-      })
-    }
-  }, [])
+    const element = ref.current
+    if (!element) return
 
-  return nodeRef
+    const targets = animationConfig.targets
+      ? element.querySelectorAll(animationConfig.targets as string)
+      : [element]
+
+      targets.forEach((el) => {
+      (el as HTMLElement).style.opacity = '0'
+    })
+
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          animate(targets.length > 1 ? targets : element, animationConfig)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15 }
+    )
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [animationConfig])
+
+  return ref
 }

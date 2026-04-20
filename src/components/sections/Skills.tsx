@@ -1,3 +1,7 @@
+import { useMemo } from 'react'
+import { stagger } from 'animejs'
+import { useScrollAnimation } from '../anime/useAnime'
+
 type Skill = {
   name: string
   icon: string
@@ -39,17 +43,40 @@ const skillsData: SkillCategory[] = [
 ]
 
 export default function Skills() {
+  const headingAnimation = useMemo(() => ({
+    opacity:    [0, 1],
+    duration:   600,
+    translateY: [16, 0],
+    easing:     'easeOutExpo',
+  }), [])
+
+  const gridAnimation = useMemo(() => ({
+    targets:    '.skill-card',
+    opacity:    [0, 1],
+    translateY: [12, 0],
+    delay:      stagger(60),
+    duration:   500,
+    easing:     'easeOutExpo',
+  }), [])
+
+  const headingRef = useScrollAnimation(headingAnimation)
+  const gridRef = useScrollAnimation(gridAnimation)
+
   return (
     <section id="skills" className="bg-slate-50 px-4 py-16 sm:px-6 md:px-12 lg:px-20">
 
       {/* Section heading */}
-      <div className="mx-auto mb-10 max-w-6xl sm:mb-12">
+      <div 
+       ref={headingRef}
+       className="mx-auto mb-10 max-w-6xl sm:mb-12">
         <p className="text-slate-400 text-sm mb-1">What I work with</p>
         <h2 className="text-3xl font-bold text-slate-800">Skills</h2>
       </div>
 
       {/* Categories */}
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 sm:gap-10">
+      <div
+       ref={gridRef} 
+       className="mx-auto flex max-w-6xl flex-col gap-8 sm:gap-10">
         {skillsData.map((group) => (
           <div key={group.category}>
 
@@ -63,7 +90,7 @@ export default function Skills() {
               {group.skills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="flex items-center gap-3 rounded-lg border border-slate-100 bg-white px-4 py-3 transition-all duration-200 hover:border-slate-300 hover:shadow-sm"
+                  className="skill-card flex items-center gap-3 rounded-lg border border-slate-100 bg-white px-4 py-3 transition-all duration-200 hover:border-slate-300 hover:shadow-sm"
                 >
                   <span className="text-xl">{skill.icon}</span>
                   <span className="text-sm font-medium text-slate-700">{skill.name}</span>
