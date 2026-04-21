@@ -33,19 +33,19 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="bg-slate-50 px-4 py-16 sm:px-6 md:px-12 lg:px-20">
+   <section id="contact" className="relative z-10 py-20 px-6 md:px-20 bg-slate-900/80">
 
       {/* Section heading */}
       <div className="mx-auto mb-10 max-w-6xl sm:mb-12">
         <p className="text-slate-400 text-sm mb-1">Get in touch</p>
-        <h2 className="text-3xl font-bold text-slate-800">Contact</h2>
+<h2 className="text-3xl font-bold text-slate-50">Contact</h2>
       </div>
 
       <div className="mx-auto max-w-6xl">
         <div className="max-w-lg">
 
           {/* Short message */}
-          <p className="mb-8 text-sm leading-relaxed text-slate-500 sm:mb-10 sm:text-base">
+          <p className="text-slate-400 text-base leading-relaxed mb-10">
             I am currently looking for my first developer role. If you have an
             opportunity or just want to say hi, feel free to reach out — I will
             get back to you as soon as possible.
@@ -62,16 +62,16 @@ export default function Contact() {
                 className="group flex w-full items-center gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3 transition-all duration-200 hover:border-slate-300 hover:shadow-sm sm:w-fit sm:min-w-[320px]"
               >
                 {/* Icon box */}
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-all duration-200 group-hover:border-slate-400 group-hover:text-slate-800">
+            <div className="w-9 h-9 rounded-lg border border-slate-700 bg-slate-800 flex items-center justify-center text-slate-400 group-hover:border-slate-500 group-hover:text-slate-100 transition-all duration-200">
                   {link.icon}
                 </div>
 
                 {/* Label + value */}
                 <div className="min-w-0">
-                  <p className="mb-0.5 text-xs leading-none text-slate-400">
+                  <p className="text-xs text-slate-500 leading-none mb-0.5">
                     {link.label}
-                  </p>
-                  <p className="truncate text-sm font-medium text-slate-700 transition-colors group-hover:text-slate-900">
+                    </p>
+          <p className="truncate text-sm font-medium text-slate-700 transition-colors group-hover:text-slate-900">
                     {link.value}
                   </p>
                 </div>
@@ -82,11 +82,10 @@ export default function Contact() {
       </div>
 
       {/* Footer line */}
-      <div className="mx-auto mt-16 max-w-6xl border-t border-slate-200 pt-8 sm:mt-20">
-        <p className="text-xs text-slate-400">
-          Built by Prince Sah · {new Date().getFullYear()}
-        </p>
-      </div>
+      
+<div className="mt-20 pt-8 border-t border-slate-800">
+  <p className="text-xs text-slate-600">Built by Prince Sah · {new Date().getFullYear()}</p>
+</div>
 
     </section>
   )

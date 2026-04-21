@@ -63,14 +63,14 @@ export default function Skills() {
   const gridRef = useScrollAnimation(gridAnimation)
 
   return (
-    <section id="skills" className="bg-slate-50 px-4 py-16 sm:px-6 md:px-12 lg:px-20">
+    <section id="skills"className="relative z-10 py-20 px-6 md:px-20 bg-slate-900/80">
 
       {/* Section heading */}
       <div 
        ref={headingRef}
        className="mx-auto mb-10 max-w-6xl sm:mb-12">
         <p className="text-slate-400 text-sm mb-1">What I work with</p>
-        <h2 className="text-3xl font-bold text-slate-800">Skills</h2>
+        <h2 className="text-3xl font-bold text-slate-50">Skills</h2>
       </div>
 
       {/* Categories */}
@@ -81,7 +81,7 @@ export default function Skills() {
           <div key={group.category}>
 
             {/* Category label */}
-            <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-4">
+            <p className="text-xs font-semibold tracking-widest uppercase text-slate-500 mb-4">
               {group.category}
             </p>
 
@@ -90,10 +90,10 @@ export default function Skills() {
               {group.skills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="skill-card flex items-center gap-3 rounded-lg border border-slate-100 bg-white px-4 py-3 transition-all duration-200 hover:border-slate-300 hover:shadow-sm"
+                  className="skill-card flex items-center gap-3 rounded-lg border border-slate-800/60 bg-white px-4 py-3 transition-all duration-200 hover:border-slate-300 hover:shadow-sm"
                 >
                   <span className="text-xl">{skill.icon}</span>
-                  <span className="text-sm font-medium text-slate-700">{skill.name}</span>
+                  <span className="text-sm font-medium text-slate-300">{skill.name}</span>
                 </div>
               ))}
             </div>
